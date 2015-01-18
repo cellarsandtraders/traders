@@ -14,7 +14,8 @@ var app = angular.module('tradersApp', [
   'ngRoute',
   'ngSanitize'
 ]);
-app.config(function ($routeProvider) {
+app.config(function ($routeProvider, $httpProvider) {
+  $httpProvider.interceptors.push('AuthInterceptor');
   $routeProvider
     .when('/', {
       templateUrl: 'views/main.html',
@@ -27,6 +28,10 @@ app.config(function ($routeProvider) {
     .when('/contact', {
       templateUrl: 'views/contact.html',
       controller: 'ContactCtrl'
+    })
+    .when('/dashboard', {
+      templateUrl: 'views/dashboard.html',
+      controller: 'DashboardCtrl'
     })
     .otherwise({
       redirectTo: '/'
