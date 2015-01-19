@@ -1,2 +1,2 @@
-# traders
-Front end app for Cellars and Traders
+# Traders
+AngularJS Front end app for Cellars and Traders
