@@ -1,6 +1,7 @@
 'use strict';
 
-app.factory('AuthInterceptor', function ($rootScope, $q, $window, $location) {
+angular.module('tradersApp')
+  .factory('AuthInterceptor', function ($rootScope, $q, $window, $location) {
 
     return {
       request: function (config) {

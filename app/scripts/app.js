@@ -8,13 +8,13 @@
  *
  * Main module of the application.
  */
-var app = angular.module('tradersApp', [
+angular.module('tradersApp', [
   'ngCookies',
   'ngResource',
   'ngRoute',
   'ngSanitize'
-]);
-app.config(function ($routeProvider, $httpProvider) {
+])
+.config(function ($routeProvider, $httpProvider) {
   $httpProvider.interceptors.push('AuthInterceptor');
   $routeProvider
     .when('/', {
@@ -36,5 +36,5 @@ app.config(function ($routeProvider, $httpProvider) {
     .otherwise({
       redirectTo: '/'
     });
-});
-app.constant('API_SERVER', 'http://127.0.0.1:8000/api/');
+})
+.constant('API_SERVER', 'http://127.0.0.1:8000/api/');
