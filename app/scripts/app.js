@@ -33,6 +33,10 @@ angular.module('tradersApp', [
       templateUrl: 'views/dashboard.html',
       controller: 'DashboardCtrl'
     })
+    .when('/search', {
+      templateUrl: 'views/search.html',
+      controller: 'SearchCtrl'
+    })
     .otherwise({
       redirectTo: '/'
     });
