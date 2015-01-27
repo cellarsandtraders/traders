@@ -37,8 +37,8 @@ describe('Service: auth', function () {
     );
     $httpBackend.flush();
 
-    expect($window.localStorage.username).toBe('test');
-    expect($window.localStorage.token).toBe('xxx');
+    expect($window.localStorage.username).toEqual('test');
+    expect($window.localStorage.token).toEqual('xxx');
 
   });
 
@@ -56,8 +56,8 @@ describe('Service: auth', function () {
     );
     $httpBackend.flush();
 
-    expect($window.localStorage.username).toBe('test');
-    expect($window.localStorage.token).toBe('xxx');
+    expect($window.localStorage.username).toEqual('test');
+    expect($window.localStorage.token).toEqual('xxx');
 
   });
 
@@ -73,8 +73,8 @@ describe('Service: auth', function () {
     );
     $httpBackend.flush();
 
-    expect($window.localStorage.username).toBe(undefined);
-    expect($window.localStorage.token).toBe(undefined);
+    expect($window.localStorage.username).toEqual(undefined);
+    expect($window.localStorage.token).toEqual(undefined);
 
   });
 

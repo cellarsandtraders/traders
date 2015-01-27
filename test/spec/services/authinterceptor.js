@@ -12,7 +12,7 @@ describe('Service: AuthInterceptor', function () {
   }));
 
   it('should do something', function () {
-    expect(!!AuthInterceptor).toBe(true);
+    expect(!!AuthInterceptor).toEqual(true);
   });
 
 });

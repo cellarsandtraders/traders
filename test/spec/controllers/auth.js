@@ -26,7 +26,6 @@ describe('Controller: AuthCtrl', function () {
     };
   }));
 
-
   afterEach(function() {
     $httpBackend.verifyNoOutstandingExpectation();
     $httpBackend.verifyNoOutstandingRequest();
@@ -44,15 +43,16 @@ describe('Controller: AuthCtrl', function () {
     ).respond(201, {username: 'test', token: 'xxx'});
 
     createController();
-    $rootScope.registerUsername = 'test';
-    $rootScope.registerPassword = 'asdf';
+    $rootScope.username = 'test';
+    $rootScope.password1 = 'asdf';
+    $rootScope.password2 = 'asdf';
     $rootScope.register();
     $httpBackend.expectPOST(apiBaseUrl + 'auth/register/', {username: 'test', password: 'asdf'});
     $httpBackend.flush();
 
-    expect($location.path()).toBe('/dashboard');
-    expect($window.localStorage.username).toBe('test');
-    expect($window.localStorage.token).toBe('xxx');
+    expect($location.path()).toEqual('/dashboard');
+    expect($window.localStorage.username).toEqual('test');
+    expect($window.localStorage.token).toEqual('xxx');
   });
 
   it('should handle registration error response', function() {
@@ -63,23 +63,42 @@ describe('Controller: AuthCtrl', function () {
     ).respond(400, {error: 'Invalid Data'});
 
     createController();
-    $rootScope.registerUsername = 'test';
-    $rootScope.registerPassword = 'asdf';
+    $rootScope.username = 'test';
+    $rootScope.password1 = 'asdf';
+    $rootScope.password2 = 'asdf';
     $rootScope.register();
     $httpBackend.expectPOST(apiBaseUrl + 'auth/register/', {username: 'test', password: 'asdf'});
     $httpBackend.flush();
 
-    expect($rootScope.error).toBe('Invalid Data');
-    expect($window.localStorage.username).toBe(undefined);
-    expect($window.localStorage.token).toBe(undefined);
+    expect($rootScope.error).toEqual('Invalid Data');
+    expect($window.localStorage.username).toEqual(undefined);
+    expect($window.localStorage.token).toEqual(undefined);
+  });
+
+  it('should error when passwords do not match', function() {
+    // Mock successful registration
+    $httpBackend.whenPOST(
+      apiBaseUrl + 'auth/register/',
+      {username: 'test', password: 'asdf'}
+    ).respond(400, {error: 'Invalid Data'});
+
+    createController();
+    $rootScope.username = 'test';
+    $rootScope.password1 = 'asdf';
+    $rootScope.password2 = 'xxx';
+    $rootScope.register();
+
+    expect($rootScope.error).toEqual('Passwords do not match');
+    expect($window.localStorage.username).toEqual(undefined);
+    expect($window.localStorage.token).toEqual(undefined);
   });
 
   it('should error without username and password', function() {
     createController();
     $rootScope.register();
-    expect($rootScope.error).toBe('Username and password required');
-    expect($window.localStorage.username).toBe(undefined);
-    expect($window.localStorage.token).toBe(undefined);
+    expect($rootScope.error).toEqual('Username and password required');
+    expect($window.localStorage.username).toEqual(undefined);
+    expect($window.localStorage.token).toEqual(undefined);
   });
 
 
@@ -93,15 +112,15 @@ describe('Controller: AuthCtrl', function () {
     ).respond(200, {username: 'test', token: 'xxx'});
 
     createController();
-    $rootScope.loginUsername = 'test';
-    $rootScope.loginPassword = 'asdf';
+    $rootScope.username = 'test';
+    $rootScope.password = 'asdf';
     $rootScope.login();
     $httpBackend.expectPOST(apiBaseUrl + 'auth/login/', {username: 'test', password: 'asdf'});
     $httpBackend.flush();
 
-    expect($location.path()).toBe('/dashboard');
-    expect($window.localStorage.username).toBe('test');
-    expect($window.localStorage.token).toBe('xxx');
+    expect($location.path()).toEqual('/dashboard');
+    expect($window.localStorage.username).toEqual('test');
+    expect($window.localStorage.token).toEqual('xxx');
   });
 
   it('should fail authentication', function() {
@@ -112,20 +131,20 @@ describe('Controller: AuthCtrl', function () {
     ).respond(400, {error: 'Invalid Username/Password'});
 
     createController();
-    $rootScope.loginUsername = 'xxx';
-    $rootScope.loginPassword = 'yyy';
+    $rootScope.username = 'xxx';
+    $rootScope.password = 'yyy';
     $rootScope.login();
     $httpBackend.expectPOST(apiBaseUrl + 'auth/login/', {username: 'xxx', password: 'yyy'});
     $httpBackend.flush();
-    expect($rootScope.error).toBe('Invalid Username/Password');
+    expect($rootScope.error).toEqual('Invalid Username/Password');
   });
 
   it('should error without username and password', function() {
     createController();
     $rootScope.login();
-    expect($rootScope.error).toBe('Username and password required');
-    expect($window.localStorage.username).toBe(undefined);
-    expect($window.localStorage.token).toBe(undefined);
+    expect($rootScope.error).toEqual('Username and password required');
+    expect($window.localStorage.username).toEqual(undefined);
+    expect($window.localStorage.token).toEqual(undefined);
   });
 
 });

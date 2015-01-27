@@ -1,10 +1,10 @@
 <div ng-controller="AuthCtrl">
     <p class="text-danger" ng-show="error">{{ error }}</p>
     <form ng-submit="register()">
-      <input type="text" class="form-control" ng-model="registerUsername" placeholder="Username">
-      <input type="email" class="form-control" placeholder="Email">
-      <input type="password" class="form-control" ng-model="registerPassword" placeholder="Password">
-      <input type="password" class="form-control" placeholder="Retype Password">
+      <input type="text" class="form-control" ng-model="username" placeholder="Username">
+      <input type="email" class="form-control" ng-model="email" placeholder="Email">
+      <input type="password" class="form-control" ng-model="password1" placeholder="Password">
+      <input type="password" class="form-control" ng-model="password2" placeholder="Retype Password">
       <input type="submit" class="btn btn-default" value="Submit">
     </form>
 </div>
