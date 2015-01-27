@@ -8,7 +8,7 @@
  * Controller of the tradersApp
  */
 angular.module('tradersApp')
-  .controller('SearchCtrl', function ($scope, breweryDBFactory) {
+  .controller('SearchCtrl', function ($scope, brewerydb) {
 
     $scope.reset= function() {
       $scope.beers = [];
@@ -19,7 +19,7 @@ angular.module('tradersApp')
     $scope.submit = function() {
       $scope.noResults = false;
 
-      breweryDBFactory.search($scope.text).then(
+      brewerydb.search($scope.text).then(
         function (response) {
           if (response.data.totalResults > 0) {
             $scope.beers = response.data.data;

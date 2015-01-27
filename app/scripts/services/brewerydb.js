@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('tradersApp')
-  .factory('breweryDBFactory', function ($http, API_SERVER) {
+  .factory('brewerydb', function ($http, API_SERVER) {
 
     var urlBase = API_SERVER + 'search/',
-        breweryDBFactory = {};
+        brewerydb = {};
 
-    breweryDBFactory.search = function (query) {
+    brewerydb.search = function (query) {
       var url = urlBase + '?q=' + encodeURIComponent(query);
       return $http.get(url, {
         headers: {'Content-Type': 'application/json'}
@@ -14,5 +14,5 @@ angular.module('tradersApp')
 
     };
 
-    return breweryDBFactory;
+    return brewerydb;
   });

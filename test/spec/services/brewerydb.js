@@ -10,10 +10,10 @@ describe('Factory: brewerydb', function () {
   beforeEach(inject(function ($injector) {
     apiBaseUrl = $injector.get('API_SERVER');
     $httpBackend = $injector.get('$httpBackend');
-    brewerydb = $injector.get('breweryDBFactory');
+    brewerydb = $injector.get('brewerydb');
   }));
 
-  // breweryDBFactory Unit Tests
+  // brewerydb Unit Tests
 
   it('should return search results', function() {
     // Mock successful registration
