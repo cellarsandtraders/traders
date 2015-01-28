@@ -1,0 +1,19 @@
+<h1>Users</h1>
+
+<div ng-repeat="user in users">
+
+  <div class="well">
+
+    <div class="lead" style="margin-bottom:0">
+      <a href="#/users/{{ user.username }}">{{ user.username }}</a>
+    </div>
+
+    <span class="badge badge-success">{{ user.cellar.length }}</span>
+    <a href="#">in Cellar</a>
+
+    <span class="badge">{{ user.wishlist.length }}</span>
+    <a href="#">in Wish List</a>
+
+  </div>
+
+</div>

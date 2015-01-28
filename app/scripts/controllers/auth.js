@@ -6,8 +6,8 @@ angular.module('tradersApp')
     $scope.register = function () {
       var username = $scope.username,
         password = $scope.password1,
-        password2 = $scope.password2,
-        email = $scope.email;
+        password2 = $scope.password2;
+        //email = $scope.email;
 
       if (password !== password2) {
         $scope.error = 'Passwords do not match';

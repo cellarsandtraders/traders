@@ -1,0 +1,11 @@
+<h1>{{ user.username }}</h1>
+
+<h3>Cellar</h3>
+<ul>
+    <li ng-repeat="item in cellar">{{ item.brewery_name }}: {{ item.beer_name }}</li>
+</ul>
+
+<h3>Wishlist</h3>
+<ul>
+    <li ng-repeat="item in wishlist">{{ item.brewery_name }}: {{ item.beer_name }}</li>
+</ul>

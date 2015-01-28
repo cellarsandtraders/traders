@@ -37,6 +37,14 @@ angular.module('tradersApp', [
       templateUrl: 'views/search.html',
       controller: 'SearchCtrl'
     })
+    .when('/users', {
+      templateUrl: 'views/users.html',
+      controller: 'UsersCtrl'
+    })
+    .when('/users/:username', {
+      templateUrl: 'views/user-details.html',
+      controller: 'UserDetailCtrl'
+    })
     .otherwise({
       redirectTo: '/'
     });
