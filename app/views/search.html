@@ -40,4 +40,9 @@
       <strong>No results found...</strong>
     </div>
 
+    <div ng-if="error" class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <strong ng-bind="error"></strong>
+    </div>
+
 </div>

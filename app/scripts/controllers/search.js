@@ -14,12 +14,15 @@ angular.module('tradersApp')
       $scope.beers = [];
       $scope.noResults = false;
       $scope.text = '';
+      $scope.error = '';
     };
 
     $scope.submit = function() {
-      $scope.noResults = false;
+      var query = $scope.text;
+      $scope.reset();
+      $scope.text = query;
 
-      brewerydb.search($scope.text).then(
+      brewerydb.search(query).then(
         function (response) {
           if (response.data.totalResults > 0) {
             $scope.beers = response.data.data;
@@ -27,6 +30,10 @@ angular.module('tradersApp')
           else {
             $scope.noResults = true;
           }
+        },
+        function (response) {
+          $scope.error = 'Error: ' + response.data.error;
+          console.log(response);
         }
       );
     };
