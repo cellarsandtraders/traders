@@ -28,7 +28,7 @@ describe('Service: auth', function () {
     $httpBackend.whenPOST(
       apiBaseUrl + 'auth/register/',
       {username: 'test', password: 'asdf'}
-    ).respond(201, {username: 'test', token: 'xxx'});
+    ).respond(201, {user: {username: 'test'}, token: 'xxx'});
 
     AuthService.register('test', 'asdf');
     $httpBackend.expectPOST(
@@ -37,7 +37,6 @@ describe('Service: auth', function () {
     );
     $httpBackend.flush();
 
-    expect($window.localStorage.username).toEqual('test');
     expect($window.localStorage.token).toEqual('xxx');
 
   });
@@ -47,7 +46,7 @@ describe('Service: auth', function () {
     $httpBackend.whenPOST(
       apiBaseUrl + 'auth/login/',
       {username: 'test', password: 'asdf'}
-    ).respond(201, {username: 'test', token: 'xxx'});
+    ).respond(201, {user: {username: 'test'}, token: 'xxx'});
 
     AuthService.login('test', 'asdf');
     $httpBackend.expectPOST(
@@ -56,7 +55,6 @@ describe('Service: auth', function () {
     );
     $httpBackend.flush();
 
-    expect($window.localStorage.username).toEqual('test');
     expect($window.localStorage.token).toEqual('xxx');
 
   });
@@ -73,8 +71,7 @@ describe('Service: auth', function () {
     );
     $httpBackend.flush();
 
-    expect($window.localStorage.username).toEqual(undefined);
-    expect($window.localStorage.token).toEqual(undefined);
+    expect($window.localStorage.token).toBeUndefined();
 
   });
 

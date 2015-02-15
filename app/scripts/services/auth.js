@@ -15,23 +15,22 @@ angular.module('tradersApp')
           'Content-Type': 'application/json'
         }
       }).then(
+        // Success callback
         function (response) {
-          // success callback
           var token = response.data.token;
-          var username = response.data.username;
+          var user = response.data.user;
 
           if (token && username) {
             $window.localStorage.token = token;
-            $window.localStorage.username = username;
             //success
-            deferred.resolve(true);
+            deferred.resolve(user);
           } else {
             // error
             deferred.reject('Invalid data received from server');
           }
         },
+        // Error callback
         function (response) {
-          // error callback
           deferred.reject(response.data.error);
         }
       );
@@ -45,7 +44,6 @@ angular.module('tradersApp')
       $http.post(url).then(
         function () {
           $window.localStorage.removeItem('token');
-          $window.localStorage.removeItem('username');
           deferred.resolve();
         },
         function (error) {
@@ -53,6 +51,10 @@ angular.module('tradersApp')
         }
       );
       return deferred.promise;
+    };
+
+    var isAuthenticated = function() {
+      return !!$window.localStorage.token;
     };
 
     return {
@@ -64,6 +66,9 @@ angular.module('tradersApp')
       },
       logout: function() {
         return logout();
+      },
+      isAuthenticated: function () {
+        return isAuthenticated();
       }
     };
 

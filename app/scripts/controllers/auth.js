@@ -7,15 +7,15 @@ angular.module('tradersApp')
       var username = $scope.username,
         password = $scope.password1,
         password2 = $scope.password2;
-        //email = $scope.email;
 
       if (password !== password2) {
         $scope.error = 'Passwords do not match';
       }
       else if (username && password) {
         AuthService.register(username, password).then(
-          function () {
-            $location.path('/dashboard');
+          function (user) {
+            $scope.setCurrentUser(user);
+            $location.path('/profile');
           },
           function (error) {
             $scope.error = error;
@@ -33,8 +33,9 @@ angular.module('tradersApp')
 
       if (username && password) {
         AuthService.login(username, password).then(
-          function () {
-            $location.path('/dashboard');
+          function (user) {
+            $scope.setCurrentUser(user);
+            $location.path('/profile');
           },
           function (error) {
             $scope.error = error;

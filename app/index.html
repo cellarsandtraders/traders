@@ -21,14 +21,14 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
+    <div class="container" ng-controller="RootCtrl">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#/">Home</a></li>
           <li><a ng-href="#/about">About</a></li>
           <li><a ng-href="#/contact">Contact</a></li>
           <li><a ng-href="#/search">Search</a></li>
           <li><a ng-href="#/users">Users</a></li>
+          <li ng-if="isAuthenticated()"><a ng-href="#/profile"><img src="http://placehold.it/32x32"></a></li>
         </ul>
         <h3 class="text-muted"><a ng-href="#/">Cellars & Traders</a></h3>
       </div>
@@ -78,7 +78,7 @@
         <script src="scripts/controllers/contact.js"></script>
         <script src="scripts/services/auth.js"></script>
         <script src="scripts/controllers/auth.js"></script>
-        <script src="scripts/controllers/dashboard.js"></script>
+        <script src="scripts/controllers/profile.js"></script>
         <script src="scripts/services/authinterceptor.js"></script>
         <script src="scripts/controllers/search.js"></script>
         <script src="scripts/services/brewerydb.js"></script>

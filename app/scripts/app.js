@@ -29,9 +29,9 @@ angular.module('tradersApp', [
       templateUrl: 'views/contact.html',
       controller: 'ContactCtrl'
     })
-    .when('/dashboard', {
-      templateUrl: 'views/dashboard.html',
-      controller: 'DashboardCtrl'
+    .when('/profile', {
+      templateUrl: 'views/profile.html',
+      controller: 'UserProfileCtrl'
     })
     .when('/search', {
       templateUrl: 'views/search.html',

@@ -22,7 +22,8 @@ describe('Controller: AuthCtrl', function () {
     var $controller = $injector.get('$controller');
 
     createController = function() {
-      return $controller('AuthCtrl', {'$scope' : $rootScope });
+      $controller('RootCtrl', {'$scope' : $rootScope });
+      $controller('AuthCtrl', {'$scope' : $rootScope });
     };
   }));
 
@@ -40,7 +41,7 @@ describe('Controller: AuthCtrl', function () {
     $httpBackend.whenPOST(
       apiBaseUrl + 'auth/register/',
       {username: 'test', password: 'asdf'}
-    ).respond(201, {username: 'test', token: 'xxx'});
+    ).respond(201, {user: {username: 'test'}, token: 'xxx'});
 
     createController();
     $rootScope.username = 'test';
@@ -50,9 +51,10 @@ describe('Controller: AuthCtrl', function () {
     $httpBackend.expectPOST(apiBaseUrl + 'auth/register/', {username: 'test', password: 'asdf'});
     $httpBackend.flush();
 
-    expect($location.path()).toEqual('/dashboard');
-    expect($window.localStorage.username).toEqual('test');
+    expect($location.path()).toEqual('/profile');
     expect($window.localStorage.token).toEqual('xxx');
+    expect($rootScope.isAuthenticated()).toBeTruthy();
+    expect($rootScope.currentUser).toEqual({username: 'test'});
   });
 
   it('should handle registration error response', function() {
@@ -71,8 +73,9 @@ describe('Controller: AuthCtrl', function () {
     $httpBackend.flush();
 
     expect($rootScope.error).toEqual('Invalid Data');
-    expect($window.localStorage.username).toEqual(undefined);
-    expect($window.localStorage.token).toEqual(undefined);
+    expect($window.localStorage.token).toBeUndefined();
+    expect($rootScope.isAuthenticated()).toBeFalsy();
+    expect($rootScope.currentUser).toBeNull();
   });
 
   it('should error when passwords do not match', function() {
@@ -89,16 +92,18 @@ describe('Controller: AuthCtrl', function () {
     $rootScope.register();
 
     expect($rootScope.error).toEqual('Passwords do not match');
-    expect($window.localStorage.username).toEqual(undefined);
-    expect($window.localStorage.token).toEqual(undefined);
+    expect($window.localStorage.token).toBeUndefined();
+    expect($rootScope.isAuthenticated()).toBeFalsy();
+    expect($rootScope.currentUser).toBeNull();
   });
 
   it('should error without username and password', function() {
     createController();
     $rootScope.register();
     expect($rootScope.error).toEqual('Username and password required');
-    expect($window.localStorage.username).toEqual(undefined);
-    expect($window.localStorage.token).toEqual(undefined);
+    expect($window.localStorage.token).toBeUndefined();
+    expect($rootScope.isAuthenticated()).toBeFalsy();
+    expect($rootScope.currentUser).toBeNull();
   });
 
 
@@ -109,7 +114,7 @@ describe('Controller: AuthCtrl', function () {
     $httpBackend.whenPOST(
       apiBaseUrl + 'auth/login/',
       {username: 'test', password: 'asdf'}
-    ).respond(200, {username: 'test', token: 'xxx'});
+    ).respond(200, {user: {username: 'test'}, token: 'xxx'});
 
     createController();
     $rootScope.username = 'test';
@@ -118,9 +123,10 @@ describe('Controller: AuthCtrl', function () {
     $httpBackend.expectPOST(apiBaseUrl + 'auth/login/', {username: 'test', password: 'asdf'});
     $httpBackend.flush();
 
-    expect($location.path()).toEqual('/dashboard');
-    expect($window.localStorage.username).toEqual('test');
+    expect($location.path()).toEqual('/profile');
     expect($window.localStorage.token).toEqual('xxx');
+    expect($rootScope.isAuthenticated()).toBeTruthy();
+    expect($rootScope.currentUser).toEqual({username: 'test'});
   });
 
   it('should fail authentication', function() {
@@ -137,14 +143,17 @@ describe('Controller: AuthCtrl', function () {
     $httpBackend.expectPOST(apiBaseUrl + 'auth/login/', {username: 'xxx', password: 'yyy'});
     $httpBackend.flush();
     expect($rootScope.error).toEqual('Invalid Username/Password');
+    expect($rootScope.isAuthenticated()).toBeFalsy();
+    expect($rootScope.currentUser).toBeNull();
   });
 
   it('should error without username and password', function() {
     createController();
     $rootScope.login();
     expect($rootScope.error).toEqual('Username and password required');
-    expect($window.localStorage.username).toEqual(undefined);
-    expect($window.localStorage.token).toEqual(undefined);
+    expect($window.localStorage.token).toBeUndefined();
+    expect($rootScope.isAuthenticated()).toBeFalsy();
+    expect($rootScope.currentUser).toBeNull();
   });
 
 });

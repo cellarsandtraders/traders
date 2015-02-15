@@ -1,17 +1,33 @@
 <div class="jumbotron">
-  <h1>Cellars & Traders</h1>
+  <h2>Cellars & Traders</h2>
   <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
     Bring your beer collection to light with Cellars & Traders. Build your cellar by searching our beer database, share your cellar with your friends online and maybe make some trades with other Cellars & Traders friends.
-
   </p>
   <p><a class="btn btn-lg" ng-href="#/about">Learn More!</a></p>
 </div>
 
-<div class="row">
-  <h4>Sign In</h4>
-  <p ng-include src="'views/partials/login.html'"></p>
+<div ng-show="!isAuthenticated()" class="row">
 
-  <h4>Join Cellars & Traders</h4>
-  <p ng-include src="'views/partials/register.html'"></p>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Log In</h3>
+      </div>
+      <div class="panel-body">
+        <p ng-include src="'views/partials/login.html'"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Sign Up</h3>
+      </div>
+      <div class="panel-body">
+        <p ng-include src="'views/partials/register.html'"></p>
+      </div>
+    </div>
+  </div>
+
 </div>
