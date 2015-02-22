@@ -59,6 +59,10 @@ angular.module('tradersApp')
       return !!$window.localStorage.token;
     };
 
+    var getCurrentUsername = function() {
+      return $window.localStorage.username;
+    };
+
     return {
       register: function (username, password) {
         return authenticate(username, password, 'register');
@@ -71,6 +75,9 @@ angular.module('tradersApp')
       },
       isAuthenticated: function () {
         return isAuthenticated();
+      },
+      getCurrentUsername: function () {
+        return getCurrentUsername();
       }
     };
 

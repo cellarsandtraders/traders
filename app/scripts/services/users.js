@@ -14,6 +14,6 @@ angular.module('tradersApp')
     var urlBase = API_SERVER + 'users';
 
     // Public API here
-    return $resource(urlBase + '/:username/:collection/:item_id');
+    return $resource(urlBase + '/:username/:collection/:item_id', {username:'@username'});
 
   });
