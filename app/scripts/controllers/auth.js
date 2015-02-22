@@ -13,8 +13,7 @@ angular.module('tradersApp')
       }
       else if (username && password) {
         AuthService.register(username, password).then(
-          function (user) {
-            $scope.setCurrentUser(user);
+          function () {
             $location.path('/profile');
           },
           function (error) {
@@ -33,8 +32,7 @@ angular.module('tradersApp')
 
       if (username && password) {
         AuthService.login(username, password).then(
-          function (user) {
-            $scope.setCurrentUser(user);
+          function () {
             $location.path('/profile');
           },
           function (error) {

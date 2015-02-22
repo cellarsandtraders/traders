@@ -3,7 +3,7 @@
     <img class="media-object" src="http://placehold.it/150x150">
   </div>
   <div class="media-body">
-    <h4 class="media-heading">SirDrinks-a-Lot</h4>
+    <h4 class="media-heading">{{ user.username }}</h4>
     <div>Last Login: 1/5/2015 3:57 PM</div>
     <div>Date Joined: 1/5/2015</div>
     <div><a href="">Change Photo</a></div>
@@ -16,41 +16,40 @@
 <form>
 
   <div class="form-group">
-    <label for="email">User Profile</label>
-    <input type="text" class="form-control" id="username" placeholder="Username">
+    <label>User Profile</label>
+    <input type="text" class="form-control" id="username" placeholder="Username" ng-model="user.username">
   </div>
   <div class="form-group">
-    <input type="email" class="form-control" id="email" placeholder="Enter email">
+    <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="user.email">
   </div>
   <div class="form-group">
     <a href="">Change Password</a>
   </div>
 
-
   <div class="form-group">
     <label>Shipping Information</label>
     <div class="row">
       <div class="col-xs-6">
-        <input type="text" class="form-control" placeholder="First Name">
+        <input type="text" class="form-control" placeholder="First Name" ng-model="user.first_name">
       </div>
       <div class="col-xs-6">
-        <input type="text" class="form-control" placeholder="Last Name">
+        <input type="text" class="form-control" placeholder="Last Name" ng-model="user.last_name">
       </div>
     </div>
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Street Address">
+    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Street Address" ng-model="user.address">
   </div>
   <div class="form-group">
     <div class="row">
       <div class="col-xs-6">
-        <input type="text" class="form-control" placeholder="City">
+        <input type="text" class="form-control" placeholder="City" ng-model="user.city">
       </div>
       <div class="col-xs-2">
-        <input type="text" class="form-control" placeholder="State">
+        <input type="text" class="form-control" placeholder="State" ng-model="user.state">
       </div>
       <div class="col-xs-4">
-        <input type="text" class="form-control" placeholder="Zip">
+        <input type="text" class="form-control" placeholder="Zip" ng-model="user.zipcode">
       </div>
     </div>
   </div>

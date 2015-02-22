@@ -22,6 +22,7 @@ angular.module('tradersApp')
 
           if (token && username) {
             $window.localStorage.token = token;
+            $window.localStorage.username = user.username;
             //success
             deferred.resolve(user);
           } else {
@@ -44,6 +45,7 @@ angular.module('tradersApp')
       $http.post(url).then(
         function () {
           $window.localStorage.removeItem('token');
+          $window.localStorage.removeItem('username');
           deferred.resolve();
         },
         function (error) {
